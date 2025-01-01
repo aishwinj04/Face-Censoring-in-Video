@@ -2,12 +2,11 @@ import cv2
 
 def analyze_video(video_path):
     success, frame = video_path.read()
+    height = 0
+    width = 0
     if success:
         height = frame.shape[0]
         width = frame.shape[1]
-    else:
-        height = 0
-        width = 0
     return success, frame, width, height
 
 def initialize_output(width, height):
@@ -25,9 +24,11 @@ def main():
     output = initialize_output(width, height)
 
     while success:
-        faces = face_cascade.detectMultiScale(frame, 1.1, 6)
+        # scale up 10%, 6 overlaps 
+        faces = face_cascade.detectMultiScale(frame, 1.2, 7)
         for(x,y,w,h) in faces:
             cv2.rectangle(frame, (x,y), (x+w, y+h), (255,255,255),9)
+        cv2.imshow('video',frame)
 
         output.write(frame)
 
