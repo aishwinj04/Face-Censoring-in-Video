@@ -5,13 +5,15 @@ def analyze_video(video_path):
     if success:
         height = frame.shape[0]
         width = frame.shape[1]
-
+    else:
+        height = 0
+        width = 0
     return success, frame, width, height
 
 def initialize_output(width, height):
     
     # create blank video to add frames to
-    output = cv2.VideoWriter('assets/output.mp4', cv2.VideoWriter_fourcc(*'mp4'), 30, (width, height))
+    output = cv2.VideoWriter('assets/output.mp4', cv2.VideoWriter_fourcc(*'mp4v'), 30, (width, height))
     return output
 
 def main():
@@ -32,9 +34,11 @@ def main():
         # get next frame
         success, frame, width, height = analyze_video(video)
 
+    # clean up
     video.release()
     output.release()
-    cv2.destroyAllWindows
+    cv2.destroyAllWindows()
+    print("Finished")
 
 if __name__ == "__main__":
     main()
