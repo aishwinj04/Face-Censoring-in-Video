@@ -25,10 +25,14 @@ def main():
 
     while success:
         # scale up 10%, 6 overlaps 
-        faces = face_cascade.detectMultiScale(frame, 1.2, 7)
+        faces = face_cascade.detectMultiScale(frame, 1.1, 4)
         for(x,y,w,h) in faces:
-            cv2.rectangle(frame, (x,y), (x+w, y+h), (255,255,255),9)
-        cv2.imshow('video',frame)
+            #cv2.rectangle(frame, (x,y), (x+w, y+h), (255,255,255),9)
+
+            # add blur to the rectangle box
+            frame[y:y+h, x:x+w] = cv2.blur(frame[y:y+h, x:x+w], (50,50))
+
+       
 
         output.write(frame)
 
@@ -39,6 +43,8 @@ def main():
     video.release()
     output.release()
     cv2.destroyAllWindows()
+
+    # generating result takes ~20seconds
     print("Finished")
 
 if __name__ == "__main__":
