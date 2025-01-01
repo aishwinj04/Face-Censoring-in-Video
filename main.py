@@ -15,7 +15,7 @@ def initialize_output(width, height):
     return output
 
 def main():
-    video = cv2.VideoWriter('assets/video1.mp4')
+    video = cv2.VideoCapture('assets/video1.mp4')
     face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
     
     success, frame, width, height = analyze_video(video)
@@ -36,6 +36,7 @@ def main():
     output.release()
     cv2.destroyAllWindows
 
-
+if __name__ == "__main__":
+    main()
 
 
