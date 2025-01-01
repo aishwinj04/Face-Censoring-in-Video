@@ -25,7 +25,7 @@ def main():
 
     while success:
         # scale up 10%, 6 overlaps 
-        faces = face_cascade.detectMultiScale(frame, 1.1, 4)
+        faces = face_cascade.detectMultiScale(frame, 1.1, 6)
         for(x,y,w,h) in faces:
             #cv2.rectangle(frame, (x,y), (x+w, y+h), (255,255,255),9)
 
